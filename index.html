@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ashlee Maravilla — Facilities Infrastructure Engineer and Project Manager specializing in data center power systems, cooling, and complex multi-trade coordination.">
+<title>Ashlee Maravilla — Facilities Infrastructure Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #01002e;
+    --ink-mid: #5a5147;
+    --ink-light: #8a7f72;
+    --ruby: #9b1b30;
+    --ruby-faint: rgba(155,27,48,0.06);
+    --ruby-border: rgba(155,27,48,0.2);
+    --ruby-rule: rgba(155,27,48,0.12);
+    --page: #f5f0e8;
+    --page-alt: #ece5d8;
+    --rule: #d9d2c5;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--page);
+    background-image:
+      linear-gradient(var(--ruby-rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ruby-rule) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  .page-container {
+    max-width: 980px;
+    margin: 0 auto;
+    background: var(--page);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 52px;
+    border-bottom: 1px solid var(--ruby-rule);
+    background: var(--page);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .nav-logo {
+    font-family: var(--mono); font-size: 20px; font-weight: 600;
+    color: var(--ruby); letter-spacing: 1px; text-decoration: none;
+  }
+  .nav-logo span { color: rgba(155,27,48,0.35); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono); font-size: 14px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--ink-light);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ruby); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 52px 68px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .bracket-tr {
+    position: absolute; top: 32px; right: 52px;
+    width: 72px; height: 72px;
+    border-top: 2px solid var(--ruby-border);
+    border-right: 2px solid var(--ruby-border);
+    pointer-events: none;
+  }
+  .bracket-bl {
+    position: absolute; bottom: 32px; left: 52px;
+    width: 52px; height: 52px;
+    border-bottom: 2px solid rgba(155,27,48,0.15);
+    border-left: 2px solid rgba(155,27,48,0.15);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 14px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--ruby);
+    margin-bottom: 22px; opacity: 0.85; line-height: 1.8;
+  }
+  .hero-eyebrow::before { content: '— '; }
+
+  .hero-name {
+    font-family: var(--sans); font-size: 80px; font-weight: 700;
+    line-height: 0.92; color: var(--ink);
+    letter-spacing: -2px; margin-bottom: 28px;
+    text-wrap: balance;
+  }
+  .hero-name .accent { color: var(--ruby); }
+
+  .hero-bio {
+    font-size: 18px; color: var(--ink-mid); line-height: 1.8;
+    max-width: 460px; margin-bottom: 36px;
+  }
+
+  .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 14px 32px; background: var(--ruby); color: var(--page);
+    border: none; font-family: var(--mono);
+    font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 600; cursor: pointer; text-decoration: none;
+    display: inline-block; transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary {
+    padding: 14px 32px; background: transparent; color: var(--ink-mid);
+    border: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 14px; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer; text-decoration: none;
+    display: inline-block; transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--ruby); color: var(--ruby); }
+
+  .hero-right { display: flex; flex-direction: column; gap: 0; }
+  .photo-block {
+    width: 100%; aspect-ratio: 4/5;
+    background: var(--ruby-faint);
+    border: 1px solid var(--ruby-border);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(155,27,48,0.35); font-size: 12px;
+    font-family: var(--mono); letter-spacing: 1px;
+    margin-bottom: 1px;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: rgba(155,27,48,0.15);
+  }
+  .stat-cell {
+    background: var(--page); padding: 14px 16px; text-align: center;
+  }
+  .stat-val {
+    font-family: var(--sans); font-size: 20px; font-weight: 700;
+    color: var(--ruby); display: block; margin-bottom: 2px;
+  }
+  .stat-lbl {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--ink-light);
+  }
+
+  /* ── SKILLS STRIP ── */
+  .skills-strip {
+    border-top: 1px solid var(--ruby-rule);
+    padding: 24px 52px;
+    display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  .skills-label {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(155,27,48,0.45);
+    margin-right: 28px; white-space: nowrap; font-weight: 700;
+  }
+  .skill-tag {
+    padding: 6px 14px;
+    border: 1px solid rgba(155,27,48,0.22);
+    color: var(--ink-mid); font-size: 12px; letter-spacing: 1px;
+    font-family: var(--mono); background: var(--ruby-faint);
+    margin-right: 8px; margin-bottom: 4px; white-space: nowrap;
+  }
+
+  /* ── FEATURED PROJECT ── */
+  .featured-project {
+    margin: 0 52px 52px;
+    border: 1px solid rgba(155,27,48,0.18);
+    background: rgba(155,27,48,0.03);
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 40px;
+    padding: 28px 32px;
+  }
+  .featured-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(155,27,48,0.5);
+    margin-bottom: 8px; font-weight: 700;
+  }
+  .featured-title {
+    font-family: var(--sans); font-size: 30px; font-weight: 600;
+    color: var(--ink); margin-bottom: 8px; letter-spacing: -0.5px;
+  }
+  .featured-desc {
+    font-size: 16px; color: var(--ink-mid); line-height: 1.7;
+  }
+  .featured-link {
+    font-family: var(--mono); font-size: 12px; color: var(--ruby);
+    cursor: pointer; white-space: nowrap; letter-spacing: 1px;
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .featured-link:hover { opacity: 0.7; }
+</style>
+</head>
+<body>
+<div class="page-container">
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">AM<span>/</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="expertise.html">Expertise</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="bracket-tr"></div>
+    <div class="bracket-bl"></div>
+
+    <div>
+      <div class="hero-eyebrow">Facilities Infrastructure Engineer<br>— Project and Construction Manager</div>
+      <h1 class="hero-name">
+        Ashlee<br>
+        <span class="accent">Maravilla</span>
+      </h1>
+      <p class="hero-bio">
+        Data center infrastructure engineer specializing in power systems, cooling, and complex multi-trade coordination. Based in the NY–NJ–CT tristate area.
+      </p>
+      <div class="btn-row">
+        <a href="projects.html" class="btn-primary">View Projects</a>
+        <a href="contact.html" class="btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="photo-block">photo placeholder</div>
+      <div class="stats-grid">
+        <div class="stat-cell"><span class="stat-val">$15M+</span><span class="stat-lbl">Program Value</span></div>
+        <div class="stat-cell"><span class="stat-val">5+</span><span class="stat-lbl">Years Exp.</span></div>
+        <div class="stat-cell"><span class="stat-val">NY·NJ·CT</span><span class="stat-lbl">Region</span></div>
+        <div class="stat-cell"><span class="stat-val">3</span><span class="stat-lbl">Major Programs</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="skills-strip">
+    <span class="skills-label">Areas of Expertise</span>
+    <span class="skill-tag">Electrical Infrastructure</span>
+    <span class="skill-tag">Mechanical Systems</span>
+    <span class="skill-tag">Hardware Planning</span>
+    <span class="skill-tag">Project Management</span>
+    <span class="skill-tag">Budget Governance</span>
+    <span class="skill-tag">Building Automation</span>
+    <span class="skill-tag">Safety &amp; Security</span>
+  </div>
+
+  <div class="featured-project">
+    <div>
+      <div class="featured-eyebrow">Featured Project</div>
+      <div class="featured-title">UPS Infrastructure Upgrade</div>
+      <div class="featured-desc">$15M phased program — 4 UPS systems &amp; 5 AHUs replaced across an active data center while preserving full site redundancy.</div>
+    </div>
+    <a href="projects.html" class="featured-link">View Case Study →</a>
+  </div>
+
+</div>
+
+<script>
+window.addEventListener('scroll', () => localStorage.setItem('home_scroll', window.scrollY));
+window.addEventListener('load', () => {
+  const s = localStorage.getItem('home_scroll');
+  if (s) setTimeout(() => window.scrollTo(0, parseInt(s)), 50);
+});
+</script>
+</body>
+</html>

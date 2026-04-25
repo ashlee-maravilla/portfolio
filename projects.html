@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Projects — Ashlee Maravilla's infrastructure program portfolio including UPS upgrades, fiber infrastructure, IBM mainframe refresh, and security modernization.">
+<title>Projects — Ashlee Maravilla</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #01002e;
+    --ink-light: #8a7f72;
+    --ruby: #9b1b30;
+    --ruby-bg: rgba(155,27,48,0.05);
+    --page: #f5f0e8;
+    --page-alt: #ece5d8;
+    --rule: #d9d2c5;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--page);
+    background-image:
+      linear-gradient(rgba(155,27,48,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(155,27,48,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  .page-container {
+    max-width: 980px;
+    margin: 0 auto;
+    background: var(--page);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 40px;
+    border-bottom: 1px solid rgba(155,27,48,0.12);
+    background: var(--page);
+    position: sticky; top: 0; z-index: 10;
+    font-family: var(--mono);
+  }
+  .nav-logo {
+    font-size: 18px; font-weight: 600; text-decoration: none;
+    color: var(--ruby); letter-spacing: 1px; white-space: nowrap;
+  }
+  .nav-logo span { color: rgba(155,27,48,0.35); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--ink-light); text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ruby); }
+  .nav-links li.active > a,
+  .nav-links li.active { color: var(--ruby); }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 44px 40px 36px;
+    border-bottom: 2px solid var(--rule);
+    background: var(--page-alt);
+    position: relative; overflow: hidden;
+  }
+  .page-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; }
+  .page-title { font-size: 40px; font-weight: 700; letter-spacing: -0.5px; }
+  .header-deco {
+    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+    font-size: 42px; opacity: 0.12; letter-spacing: 8px;
+    pointer-events: none; user-select: none;
+  }
+
+  /* CONTROLS BAR */
+  .controls-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 40px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--page-alt);
+    gap: 16px; flex-wrap: wrap;
+  }
+  .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 6px 14px; font-family: var(--sans); font-size: 11px;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    border: 1.5px solid var(--rule); background: var(--page);
+    cursor: pointer; color: var(--ink-light); transition: all 0.12s;
+  }
+  .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .filter-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  .view-toggle { display: flex; border: 1.5px solid var(--rule); overflow: hidden; }
+  .view-btn {
+    padding: 6px 14px; font-family: var(--sans); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    background: var(--page); border: none; border-right: 1.5px solid var(--rule);
+    cursor: pointer; color: var(--ink-light); transition: all 0.12s;
+  }
+  .view-btn:last-child { border-right: none; }
+  .view-btn.active { background: var(--ink); color: #fff; }
+
+  /* FEATURED PROJECT */
+  .featured-wrap { padding: 32px 40px 0; }
+  .featured-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700;
+  }
+  .featured-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  .featured-card {
+    border: 2px solid var(--ink);
+    background: var(--page);
+    margin-bottom: 32px;
+    cursor: pointer;
+    transition: box-shadow 0.15s;
+    position: relative;
+  }
+  .featured-card:hover { box-shadow: 4px 4px 0 var(--ink); }
+  .featured-card .pin-badge {
+    position: absolute; top: -1px; right: 24px;
+    background: var(--ink); color: #fff;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 10px; font-family: var(--sans);
+  }
+  .featured-card-inner { display: grid; grid-template-columns: 240px 1fr; }
+  .featured-thumb {
+    background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(0,0,0,0.04) 8px, rgba(0,0,0,0.04) 9px);
+    border-right: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--ink-light); min-height: 220px;
+    padding: 20px; text-align: center; font-family: var(--sans);
+  }
+  .featured-body { padding: 28px 28px 24px; }
+  .featured-meta { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px; }
+  .featured-title { font-size: 22px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; font-family: var(--mono); }
+  .featured-summary { font-size: 13px; line-height: 1.8; color: #444; margin-bottom: 16px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 4px 10px; border: 1.5px solid;
+    font-family: var(--sans); font-weight: 600;
+  }
+  .tag-blue   { color: #1a5ca8; border-color: #1a5ca8; background: #e8f0fc; }
+  .tag-green  { color: #267a50; border-color: #267a50; background: #eefaf3; }
+  .tag-amber  { color: #b06a00; border-color: #b06a00; background: #fff8ee; }
+  .tag-purple { color: #6040b0; border-color: #6040b0; background: #f3f0fa; }
+  .tag-red    { color: #b03030; border-color: #b03030; background: #fff0f0; }
+  .tag-yellow { color: #7a6000; border-color: #c9a000; background: #fffbe6; }
+  .tag-orange { color: #b04f00; border-color: #d46a00; background: #fff4e6; }
+
+  /* EXPAND TOGGLE */
+  .expand-toggle {
+    border-top: 1.5px solid var(--rule);
+    padding: 10px 28px; font-size: 11px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--ruby); cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    user-select: none; background: none; width: 100%;
+    text-align: left; font-family: var(--sans);
+    transition: background 0.1s;
+  }
+  .expand-toggle:hover { background: var(--ruby-bg); }
+  .expand-arrow { transition: transform 0.2s; display: inline-block; }
+  .expand-arrow.open { transform: rotate(90deg); }
+
+  /* EXPANDED DETAIL */
+  .expand-panel {
+    border-top: 2px solid var(--ink);
+    background: var(--page-alt);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+  .expand-panel.open { max-height: 900px; }
+  .expand-inner { padding: 28px; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px; }
+  .detail-col-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; }
+  .bullet-list { list-style: none; padding: 0; }
+  .bullet-list li {
+    font-size: 13px; line-height: 1.7; color: #333;
+    padding: 6px 0; border-bottom: 1px dashed var(--rule);
+    padding-left: 14px; position: relative;
+  }
+  .bullet-list li:last-child { border-bottom: none; }
+  .bullet-list li::before { content: '—'; position: absolute; left: 0; color: var(--ink-light); }
+
+  .stat-strip { display: flex; gap: 0; border: 2px solid var(--ink); margin-top: 20px; background: var(--page); }
+  .stat-cell { flex: 1; padding: 16px 12px; border-right: 1.5px solid var(--rule); text-align: center; }
+  .stat-cell:last-child { border-right: none; }
+  .stat-val { font-size: 22px; font-weight: 700; display: block; margin-bottom: 2px; }
+  .stat-lbl { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-light); }
+
+  /* PROJECT GRID */
+  .grid-section { padding: 0 40px 40px; }
+  .grid-section-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 16px; padding-top: 8px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .grid-section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .project-card {
+    border: 2px solid var(--rule);
+    background: var(--page);
+    cursor: pointer; transition: border-color 0.12s, box-shadow 0.12s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { border-color: var(--ink); box-shadow: 3px 3px 0 rgba(0,0,0,0.1); }
+  .project-card.hidden { display: none; }
+  .card-thumb {
+    background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(0,0,0,0.03) 8px, rgba(0,0,0,0.03) 9px);
+    border-bottom: 1.5px solid var(--rule);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--ink-light); height: 130px; text-align: center;
+    padding: 16px; font-family: var(--sans);
+  }
+  .card-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
+  .card-meta { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 6px; }
+  .card-title { font-size: 16px; font-weight: 700; line-height: 1.3; margin-bottom: 10px; font-family: var(--mono); }
+  .card-summary { font-size: 12px; line-height: 1.7; color: #555; margin-bottom: 14px; flex: 1; }
+
+  /* TIMELINE VIEW */
+  .timeline-wrap { padding: 8px 40px 40px; display: none; }
+  .timeline-wrap.visible { display: block; }
+  .timeline-item {
+    display: grid; grid-template-columns: 90px 28px 1fr;
+    gap: 0 16px; margin-bottom: 0;
+    position: relative;
+  }
+  .tl-year {
+    text-align: right; padding-top: 18px;
+    font-size: 12px; color: var(--ink-light);
+    font-family: var(--sans); white-space: nowrap;
+  }
+  .tl-spine { display: flex; flex-direction: column; align-items: center; }
+  .tl-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--ink); border: 2px solid var(--page);
+    outline: 2px solid var(--ink);
+    margin-top: 22px; flex-shrink: 0; z-index: 1;
+  }
+  .tl-line { flex: 1; width: 2px; background: var(--rule); }
+  .tl-content { padding: 14px 0 32px; }
+  .tl-title { font-size: 17px; font-weight: 700; font-family: var(--mono); margin-bottom: 4px; }
+  .tl-duration { font-size: 11px; color: var(--ink-light); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .tl-desc { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 10px; }
+
+  /* NO RESULTS */
+  .no-results {
+    padding: 48px 0; text-align: center;
+    font-size: 14px; color: var(--ink-light);
+    display: none;
+  }
+  .no-results.visible { display: block; }
+</style>
+</head>
+<body>
+<div class="page-container">
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">AM<span>/</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="expertise.html">Expertise</a></li>
+      <li class="active"><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="header-deco">⚡🔧📐</div>
+    <div class="page-eyebrow">Work</div>
+    <div class="page-title">Projects</div>
+  </div>
+
+  <div class="controls-bar">
+    <div class="filter-group" id="filterGroup">
+      <button class="filter-btn active" onclick="setFilter('all', event)">All</button>
+      <button class="filter-btn" onclick="setFilter('electrical', event)">Electrical</button>
+      <button class="filter-btn" onclick="setFilter('mechanical', event)">Mechanical</button>
+      <button class="filter-btn" onclick="setFilter('hardware', event)">Hardware</button>
+      <button class="filter-btn" onclick="setFilter('security', event)">Security</button>
+      <button class="filter-btn" onclick="setFilter('pm', event)">Project Mgmt</button>
+    </div>
+    <div class="view-toggle">
+      <button class="view-btn active" id="btn-grid" onclick="setView('grid')">&#9645; Grid</button>
+      <button class="view-btn" id="btn-timeline" onclick="setView('timeline')">&#9135; Timeline</button>
+    </div>
+  </div>
+
+  <!-- GRID VIEW -->
+  <div id="gridView">
+
+    <!-- FEATURED -->
+    <div class="featured-wrap" id="featuredWrap">
+      <div class="featured-label">Featured Project</div>
+      <div class="featured-card" id="featuredCard" data-tags="electrical mechanical pm budget" onclick="toggleExpand('featured')">
+        <div class="pin-badge">★ Pinned</div>
+        <div class="featured-card-inner">
+          <div class="featured-thumb">project photo / diagram</div>
+          <div class="featured-body">
+            <div class="featured-meta">2022 – 2026 &nbsp;·&nbsp; UPS / Facilities Infrastructure</div>
+            <div class="featured-title">UPS Infrastructure Upgrade</div>
+            <div class="featured-summary">
+              Directed a phased, $15M multi-year program replacing four 750 kVA UPS systems and five 3,000+ CFM air handling units across an active data center — without compromising site redundancy.
+            </div>
+            <div class="tag-row">
+              <span class="tag tag-yellow">Electrical</span>
+              <span class="tag tag-blue">Mechanical</span>
+              <span class="tag tag-orange">Project Mgmt</span>
+              <span class="tag tag-green">Budget Governance</span>
+            </div>
+          </div>
+        </div>
+        <button class="expand-toggle" onclick="toggleExpand('featured'); event.stopPropagation();">
+          <span class="expand-arrow" id="arrow-featured">▶</span> View details
+        </button>
+        <div class="expand-panel" id="panel-featured">
+          <div class="expand-inner">
+            <div class="stat-strip">
+              <div class="stat-cell"><span class="stat-val">$15M</span><span class="stat-lbl">Program Budget</span></div>
+              <div class="stat-cell"><span class="stat-val">4 yrs</span><span class="stat-lbl">Duration</span></div>
+              <div class="stat-cell"><span class="stat-val">4 UPS</span><span class="stat-lbl">Systems Replaced</span></div>
+              <div class="stat-cell"><span class="stat-val">5 AHU</span><span class="stat-lbl">Units Replaced</span></div>
+            </div>
+            <div class="detail-grid" style="margin-top:20px;">
+              <div>
+                <div class="detail-col-label">Scope &amp; Execution</div>
+                <ul class="bullet-list">
+                  <li>Directed phased Waterfall schedule for UPS and AHU replacements, preserving site redundancy throughout</li>
+                  <li>Coordinated multiple trades and vendors within defined blackout windows and maintenance schedules</li>
+                  <li>Walked the site daily with the Construction Manager to track progress and address trade-specific queries</li>
+                  <li>Designed MOPs and backout procedures for commissioning and operating new equipment</li>
+                  <li>Participated in Factory Witness Testing, manufacturer start-up, BMS commissioning, and troubleshooting</li>
+                </ul>
+              </div>
+              <div>
+                <div class="detail-col-label">Financial &amp; Documentation</div>
+                <ul class="bullet-list">
+                  <li>Governed a $15M budget across capitalized and expensed portions</li>
+                  <li>Prepared scope of work, construction estimates, and bidding documents</li>
+                  <li>Processed invoices and change orders throughout program lifecycle</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER PROJECTS GRID -->
+    <div class="grid-section">
+      <div class="grid-section-label">All Projects</div>
+      <div class="project-grid" id="projectGrid">
+
+        <!-- ISP Fiber -->
+        <div class="project-card" data-tags="electrical hardware pm" onclick="toggleExpand('fiber')">
+          <div class="card-thumb">fiber routing / cabinet diagram</div>
+          <div class="card-body">
+            <div class="card-meta">2023 – 2024 &nbsp;·&nbsp; ISP / Network Infrastructure</div>
+            <div class="card-title">ISP Fiber Infrastructure Refresh</div>
+            <div class="card-summary">End-to-end delivery of two sequential fiber projects routing new runs from street-level circuits into data center cabinets for AT&amp;T (2023) and Verizon (2024).</div>
+            <div class="tag-row">
+              <span class="tag tag-yellow">Electrical</span>
+              <span class="tag tag-purple">Hardware</span>
+              <span class="tag tag-orange">Project Mgmt</span>
+            </div>
+          </div>
+          <button class="expand-toggle" onclick="toggleExpand('fiber'); event.stopPropagation();">
+            <span class="expand-arrow" id="arrow-fiber">▶</span> View details
+          </button>
+          <div class="expand-panel" id="panel-fiber">
+            <div class="expand-inner">
+              <ul class="bullet-list">
+                <li>Managed end-to-end delivery of two sequential fiber infrastructure projects for AT&amp;T (2023) and Verizon (2024)</li>
+                <li>Routed new fiber runs from street-level circuits through the facility into new data center cabinets</li>
+                <li>Orchestrated cross-functional coordination across facilities, network teams, ISP business reps, ISP labor, and security</li>
+                <li>Planned and executed cutovers to ensure 100% uptime of service</li>
+                <li>Represented department in weekly cross-functional meetings; synthesized outcomes and reported key updates to upper management</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- IBM Mainframe -->
+        <div class="project-card" data-tags="electrical hardware pm" onclick="toggleExpand('ibm')">
+          <div class="card-thumb">server room / mainframe</div>
+          <div class="card-body">
+            <div class="card-meta">2024 – 2025 &nbsp;·&nbsp; IBM / Hardware</div>
+            <div class="card-title">IBM Mainframe Refresh</div>
+            <div class="card-summary">Multi-system mainframe refresh coordinated across IBM engineering teams, resolving connection issues while maintaining project schedule.</div>
+            <div class="tag-row">
+              <span class="tag tag-yellow">Electrical</span>
+              <span class="tag tag-purple">Hardware</span>
+              <span class="tag tag-orange">Project Mgmt</span>
+            </div>
+          </div>
+          <button class="expand-toggle" onclick="toggleExpand('ibm'); event.stopPropagation();">
+            <span class="expand-arrow" id="arrow-ibm">▶</span> View details
+          </button>
+          <div class="expand-panel" id="panel-ibm">
+            <div class="expand-inner">
+              <ul class="bullet-list">
+                <li>Represented department in weekly cross-functional update meetings to track progress and remedy issues</li>
+                <li>Assisted IBM client engineers to troubleshoot connection issues and maintain project schedule</li>
+                <li>Coordinated installation of replacement frames, executed controlled decommissioning of legacy frames, and ensured chain-of-custody compliance for secure return to IBM</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div class="project-card" data-tags="security hardware pm" onclick="toggleExpand('security')">
+          <div class="card-thumb">security camera / network diagram</div>
+          <div class="card-body">
+            <div class="card-meta">2022 – 2023 &nbsp;·&nbsp; Security Infrastructure</div>
+            <div class="card-title">Security Infrastructure Modernization</div>
+            <div class="card-summary">Managed phased rollout of 77 camera and archiver upgrades across two implementation phases, extending PoE switch infrastructure across campus.</div>
+            <div class="tag-row">
+              <span class="tag tag-red">Security</span>
+              <span class="tag tag-purple">Hardware</span>
+              <span class="tag tag-orange">Project Mgmt</span>
+            </div>
+          </div>
+          <button class="expand-toggle" onclick="toggleExpand('security'); event.stopPropagation();">
+            <span class="expand-arrow" id="arrow-security">▶</span> View details
+          </button>
+          <div class="expand-panel" id="panel-security">
+            <div class="expand-inner">
+              <ul class="bullet-list">
+                <li>Managed phased rollout of 77 camera and archiver upgrades across 2 implementation phases</li>
+                <li>Coordinated scheduled blackout windows and stakeholder communications to maintain operational coverage</li>
+                <li>Engaged campus and network teams to extend switch infrastructure for new PoE camera deployments</li>
+                <li>Determined camera placement and cable routing, achieving comprehensive coverage while minimizing material costs and installation complexity</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="no-results" id="noResults">No projects match this filter.</div>
+    </div>
+  </div>
+
+  <!-- TIMELINE VIEW -->
+  <div class="timeline-wrap" id="timelineView">
+    <div style="padding-top:24px;">
+
+      <div class="timeline-item" data-tags="electrical mechanical pm budget">
+        <div class="tl-year">2022–2026</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">UPS Infrastructure Upgrade</div>
+          <div class="tl-duration">4 years &nbsp;·&nbsp; Facilities Infrastructure, UPS</div>
+          <div class="tl-desc">$15M phased program replacing four 750 kVA UPS systems and five 3,000+ CFM AHUs across an active data center, preserving full site redundancy throughout.</div>
+          <div class="tag-row">
+            <span class="tag tag-yellow">Electrical</span>
+            <span class="tag tag-blue">Mechanical</span>
+            <span class="tag tag-orange">Project Mgmt</span>
+            <span class="tag tag-green">Budget Governance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-tags="electrical hardware pm">
+        <div class="tl-year">2023–2024</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">ISP Fiber Infrastructure Refresh</div>
+          <div class="tl-duration">1 year &nbsp;·&nbsp; ISP / Network Infrastructure</div>
+          <div class="tl-desc">End-to-end delivery of fiber infrastructure projects for AT&amp;T and Verizon, routing new runs from street-level circuits into data center cabinets with zero service downtime.</div>
+          <div class="tag-row">
+            <span class="tag tag-yellow">Electrical</span>
+            <span class="tag tag-purple">Hardware</span>
+            <span class="tag tag-orange">Project Mgmt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-tags="electrical hardware pm">
+        <div class="tl-year">2024–2025</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">IBM Mainframe Refresh</div>
+          <div class="tl-duration">1 year &nbsp;·&nbsp; Hardware, Cross-functional</div>
+          <div class="tl-desc">Multi-system mainframe refresh coordinated across IBM engineering teams. Represented department in weekly cross-functional meetings, resolving connection issues to maintain schedule.</div>
+          <div class="tag-row">
+            <span class="tag tag-yellow">Electrical</span>
+            <span class="tag tag-purple">Hardware</span>
+            <span class="tag tag-orange">Project Mgmt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-tags="security hardware pm">
+        <div class="tl-year">2022–2023</div>
+        <div class="tl-spine"><div class="tl-dot" style="background:#888;outline-color:#888;"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Security Infrastructure Modernization</div>
+          <div class="tl-duration">1 year &nbsp;·&nbsp; Security, Networking</div>
+          <div class="tl-desc">Phased rollout of 77 camera and archiver upgrades across two implementation phases, extending switch infrastructure for PoE deployments across campus.</div>
+          <div class="tag-row">
+            <span class="tag tag-red">Security</span>
+            <span class="tag tag-purple">Hardware</span>
+            <span class="tag tag-orange">Project Mgmt</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+let currentView = localStorage.getItem('proj_view') || 'grid';
+let currentFilter = localStorage.getItem('proj_filter') || 'all';
+const expanded = {};
+
+function setView(v) {
+  currentView = v;
+  localStorage.setItem('proj_view', v);
+  document.getElementById('gridView').style.display = v === 'grid' ? 'block' : 'none';
+  document.getElementById('timelineView').style.display = v === 'timeline' ? 'block' : 'none';
+  document.getElementById('btn-grid').classList.toggle('active', v === 'grid');
+  document.getElementById('btn-timeline').classList.toggle('active', v === 'timeline');
+  if (v === 'timeline') applyTimelineFilter();
+}
+
+function setFilter(f, event) {
+  currentFilter = f;
+  localStorage.setItem('proj_filter', f);
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  applyGridFilter();
+  applyTimelineFilter();
+}
+
+function applyGridFilter() {
+  const f = currentFilter;
+  const fc = document.getElementById('featuredCard');
+  const fw = document.getElementById('featuredWrap');
+  const showFeatured = f === 'all' || fc.dataset.tags.includes(f);
+  fw.style.display = showFeatured ? '' : 'none';
+
+  const cards = document.querySelectorAll('.project-card');
+  let visCount = 0;
+  cards.forEach(card => {
+    const show = f === 'all' || card.dataset.tags.includes(f);
+    card.classList.toggle('hidden', !show);
+    if (show) visCount++;
+  });
+  document.getElementById('noResults').classList.toggle('visible', visCount === 0 && !showFeatured);
+}
+
+function applyTimelineFilter() {
+  const f = currentFilter;
+  document.querySelectorAll('#timelineView .timeline-item').forEach(item => {
+    const show = f === 'all' || item.dataset.tags.includes(f);
+    item.style.display = show ? 'grid' : 'none';
+  });
+}
+
+function toggleExpand(id) {
+  expanded[id] = !expanded[id];
+  const panel = document.getElementById('panel-' + id);
+  const arrow = document.getElementById('arrow-' + id);
+  panel.classList.toggle('open', expanded[id]);
+  arrow.classList.toggle('open', expanded[id]);
+}
+
+window.addEventListener('load', () => {
+  setView(currentView);
+  const filterKeys = ['all','electrical','mechanical','hardware','security','pm'];
+  document.querySelectorAll('.filter-btn').forEach((b, i) => b.classList.toggle('active', filterKeys[i] === currentFilter));
+  applyGridFilter();
+  applyTimelineFilter();
+});
+
+window.addEventListener('scroll', () => localStorage.setItem('proj_scroll', window.scrollY));
+window.addEventListener('load', () => {
+  const s = localStorage.getItem('proj_scroll');
+  if (s) setTimeout(() => window.scrollTo(0, parseInt(s)), 50);
+});
+</script>
+</body>
+</html>

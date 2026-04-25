@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="About Ashlee Maravilla — Facilities Infrastructure Engineer, background, education, values, and community involvement.">
+<title>About — Ashlee Maravilla</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #01002e;
+    --ink-mid: #5a5147;
+    --ink-light: #8a7f72;
+    --ruby: #9b1b30;
+    --ruby-faint: rgba(155,27,48,0.06);
+    --ruby-border: rgba(155,27,48,0.2);
+    --ruby-rule: rgba(155,27,48,0.1);
+    --sapphire: #1a4bdb;
+    --sapphire-bg: #eef2ff;
+    --amber: #b06a00;
+    --amber-bg: #fff8ee;
+    --page: #f5f0e8;
+    --page-alt: #ece5d8;
+    --rule: #d9d2c5;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--page);
+    background-image:
+      linear-gradient(var(--ruby-rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ruby-rule) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  .page-container {
+    max-width: 980px;
+    margin: 0 auto;
+    background: var(--page);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 52px;
+    border-bottom: 1px solid var(--ruby-rule);
+    background: var(--page);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .nav-logo {
+    font-family: var(--mono); font-size: 18px; font-weight: 600;
+    color: var(--ruby); letter-spacing: 1px; text-decoration: none;
+  }
+  .nav-logo span { color: rgba(155,27,48,0.35); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--ink-light); text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--ruby); }
+  .nav-links a.active { color: var(--ruby); border-bottom: 1.5px solid var(--ruby); padding-bottom: 2px; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 52px 52px 44px;
+    background: var(--page-alt);
+    border-bottom: 1px solid var(--rule);
+    position: relative; overflow: hidden;
+  }
+  .page-eyebrow {
+    font-family: var(--mono); font-size: 14px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--ruby); margin-bottom: 14px;
+    opacity: 0.85;
+  }
+  .page-eyebrow::before { content: '— '; }
+  .page-title {
+    font-family: var(--sans); font-size: 56px; font-weight: 700;
+    letter-spacing: -1.5px; line-height: 1; color: var(--ink);
+  }
+  .bracket-tr {
+    position: absolute; top: 28px; right: 52px;
+    width: 60px; height: 60px;
+    border-top: 1.5px solid var(--ruby-border);
+    border-right: 1.5px solid var(--ruby-border);
+    pointer-events: none;
+  }
+
+  /* ── SECTIONS ── */
+  .section { padding: 44px 52px; border-bottom: 1px solid var(--rule); position: relative; }
+  .section:last-child { border-bottom: none; }
+  .section-alt { background: var(--page-alt); }
+
+  .section-label {
+    font-family: var(--mono); font-size: 14px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--ruby); margin-bottom: 28px;
+    opacity: 0.75; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--ruby-border); }
+
+  /* ── PHOTO STRIP ── */
+  .photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 36px; }
+  .photo-block {
+    aspect-ratio: 3/4;
+    background: var(--ruby-faint);
+    border: 1px solid var(--ruby-border);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; color: rgba(155,27,48,0.3);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1px; gap: 8px;
+  }
+  .photo-block-num {
+    font-size: 20px; font-weight: 600; color: rgba(155,27,48,0.15);
+  }
+
+  /* ── BIO ── */
+  .bio-text { font-size: 16px; line-height: 1.85; color: var(--ink-mid); }
+  .bio-text p + p { margin-top: 20px; }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(155,27,48,0.15);
+    margin-top: 32px; border: 1px solid rgba(155,27,48,0.15);
+  }
+  .stat-cell { background: var(--page); padding: 20px 16px; text-align: center; }
+  .stat-val { font-size: 30px; font-weight: 700; color: var(--ruby); display: block; margin-bottom: 4px; }
+  .stat-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-light); }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    border: 1px solid var(--ruby-border);
+    background: var(--ruby-faint);
+    padding: 28px 32px;
+    display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center;
+  }
+  .edu-monogram {
+    width: 56px; height: 56px; background: var(--ruby);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 18px; font-weight: 600;
+    color: var(--page); flex-shrink: 0;
+  }
+  .edu-school { font-size: 18px; font-weight: 700; margin-bottom: 5px; }
+  .edu-degree { font-size: 14px; color: var(--ruby); font-weight: 600; margin-bottom: 4px; }
+  .edu-year { font-family: var(--mono); font-size: 12px; color: var(--ink-light); letter-spacing: 1px; }
+
+  /* ── VALUES ── */
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .value-card {
+    border: 1px solid var(--rule); padding: 22px 20px;
+    background: var(--page); transition: border-color 0.15s;
+  }
+  .value-card:hover { border-color: var(--ruby-border); }
+  .value-marker {
+    width: 28px; height: 3px; background: var(--ruby);
+    margin-bottom: 14px; opacity: 0.6;
+  }
+  .value-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+  .value-desc { font-size: 13px; color: var(--ink-mid); line-height: 1.65; }
+
+  /* ── FUN FACTS ── */
+  .facts-list { display: flex; flex-direction: column; gap: 10px; }
+  .fact-item {
+    display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center;
+    border: 1px dashed rgba(176,106,0,0.4);
+    background: var(--amber-bg);
+    padding: 14px 18px; font-size: 14px; line-height: 1.7; color: var(--ink-mid);
+    min-height: 52px;
+  }
+  .fact-emoji {
+    font-size: 24px; line-height: 1; text-align: center;
+    width: 28px; flex-shrink: 0;
+  }
+
+  /* ── HOBBIES ── */
+  .hobbies-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hobby-pill {
+    padding: 8px 18px;
+    border: 1.5px solid var(--sapphire);
+    background: var(--sapphire-bg);
+    font-family: var(--mono); font-size: 12px;
+    color: var(--sapphire); font-weight: 500; letter-spacing: 0.5px;
+  }
+
+  /* ── VOLUNTEER ── */
+  .volunteer-item {
+    display: grid; grid-template-columns: 40px 1fr; gap: 20px;
+    padding: 22px 0; border-bottom: 1px dashed var(--rule); align-items: start;
+  }
+  .volunteer-item:last-child { border-bottom: none; }
+  .volunteer-icon {
+    font-size: 24px; text-align: center; padding-top: 3px;
+  }
+  .volunteer-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .volunteer-bullets { list-style: none; padding: 0; margin-top: 8px; }
+  .volunteer-bullets li {
+    font-size: 13px; color: var(--ink-mid); line-height: 1.7;
+    padding-left: 14px; position: relative; margin-bottom: 4px;
+  }
+  .volunteer-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--ink-light); }
+</style>
+</head>
+<body>
+<div class="page-container">
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">AM<span>/</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="expertise.html">Expertise</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="bracket-tr"></div>
+    <div class="page-eyebrow">Background</div>
+    <div class="page-title">About Ashlee</div>
+  </div>
+
+  <!-- BIO -->
+  <div class="section">
+    <div class="section-label">Bio</div>
+    <div class="photo-strip">
+      <div class="photo-block"><div class="photo-block-num">01</div><span>photo</span></div>
+      <div class="photo-block"><div class="photo-block-num">02</div><span>photo</span></div>
+      <div class="photo-block"><div class="photo-block-num">03</div><span>photo</span></div>
+    </div>
+    <div class="bio-text">
+      <p>Project Manager and Electrical Engineer with a track record of delivering complex, multi-phase infrastructure from design through commissioning. I thrive in fast-paced environments where strong communication, proactive risk management, and cross-functional coordination are essential.</p>
+      <p>Based in the NY–NJ–CT tristate area, I bridge technical and business teams across electrical, mechanical, hardware, fire protection, and building automation systems — driven by an unrelenting ambition to keep learning and bring others along.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><span class="stat-val">5+</span><span class="stat-lbl">Years Experience</span></div>
+      <div class="stat-cell"><span class="stat-val">$15M+</span><span class="stat-lbl">Program Value</span></div>
+      <div class="stat-cell"><span class="stat-val">NY·NJ·CT</span><span class="stat-lbl">Tristate Area</span></div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section section-alt">
+    <div class="section-label">Education</div>
+    <div class="edu-card">
+      <div class="edu-monogram">BS</div>
+      <div>
+        <div class="edu-school">State University of New York at New Paltz</div>
+        <div class="edu-degree">Bachelor of Science — Electrical Engineering</div>
+        <div class="edu-year">Graduated May 2020</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="section">
+    <div class="section-label">Values &amp; Philosophy</div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-marker"></div>
+        <div class="value-title">Technical Curiosity</div>
+        <div class="value-desc">I dig into systems until I understand them — then I teach others.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-marker"></div>
+        <div class="value-title">Team First</div>
+        <div class="value-desc">The best outcomes come from aligned teams, not lone experts.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-marker"></div>
+        <div class="value-title">Precision &amp; Care</div>
+        <div class="value-desc">Infrastructure has zero tolerance for error. I plan accordingly.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-marker"></div>
+        <div class="value-title">Continuous Growth</div>
+        <div class="value-desc">Every project is a chance to learn something new.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-marker"></div>
+        <div class="value-title">Clear Communication</div>
+        <div class="value-desc">Technical ideas should be accessible to everyone in the room.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-marker"></div>
+        <div class="value-title">Bias for Action</div>
+        <div class="value-desc">I move quickly, decide confidently, and adapt when needed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FUN FACTS -->
+  <div class="section section-alt">
+    <div class="section-label">Fun Facts</div>
+    <div class="facts-list">
+      <div class="fact-item">
+        <span class="fact-emoji">👨‍👩‍👧</span>
+        <span>Engineering runs in my family — from my mother and her cousins to distant grand-uncles.</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-emoji">🏙️</span>
+        <span>Grew up in New York City — the infrastructure here is personal and a way of life.</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-emoji">⚡</span>
+        <span>Electricity is the future and seems like magic if utilized correctly.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOBBIES -->
+  <div class="section">
+    <div class="section-label">Hobbies &amp; Interests</div>
+    <div class="hobbies-grid">
+      <span class="hobby-pill">Robotics</span>
+      <span class="hobby-pill">Fitness</span>
+      <span class="hobby-pill">Crocheting</span>
+      <span class="hobby-pill">Baking</span>
+      <span class="hobby-pill">Hiking</span>
+      <span class="hobby-pill">Gaming</span>
+    </div>
+  </div>
+
+  <!-- VOLUNTEER -->
+  <div class="section section-alt">
+    <div class="section-label">Volunteer &amp; Community</div>
+    <div class="volunteer-item">
+      <div class="volunteer-icon">🤖</div>
+      <div>
+        <div class="volunteer-title">Mentor — Mahwah High School Robotics Team</div>
+        <ul class="volunteer-bullets">
+          <li>Guided students to map component placement for accessibility and easy replacement</li>
+          <li>Supervised safe handling of shop and electrical equipment</li>
+          <li>Attended meets and competitions to show support and cheer along</li>
+        </ul>
+      </div>
+    </div>
+    <div class="volunteer-item">
+      <div class="volunteer-icon">🏉</div>
+      <div>
+        <div class="volunteer-title">Vice President — Hudson Valley Rugby Club</div>
+        <ul class="volunteer-bullets">
+          <li>Facilitated monthly status meetings regarding team operation, game planning, and tournament organization</li>
+          <li>Coordinated medical standby, referees, visiting teams, and catering for post-game celebrations</li>
+          <li>Moderated club communication platform to ensure clear threads and process incoming players</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+window.addEventListener('scroll', () => localStorage.setItem('about_scroll', window.scrollY));
+window.addEventListener('load', () => {
+  const s = localStorage.getItem('about_scroll');
+  if (s) setTimeout(() => window.scrollTo(0, parseInt(s)), 50);
+});
+</script>
+</body>
+</html>
