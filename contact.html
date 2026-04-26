@@ -13,11 +13,10 @@
     --ink: #01002e;
     --ink-light: #8a7f72;
     --ruby: #9b1b30;
-    --green: #267a50;
-    --green-bg: #eefaf3;
     --page: #f5f0e8;
     --page-alt: #ece5d8;
     --rule: #d9d2c5;
+    --ruby-rule: rgba(155,27,48,0.12);
     --mono: 'IBM Plex Mono', monospace;
     --sans: 'Space Grotesk', sans-serif;
   }
@@ -25,10 +24,11 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--sans);
+    font-size: 18px;
     background: var(--page);
     background-image:
-      linear-gradient(rgba(155,27,48,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(155,27,48,0.06) 1px, transparent 1px);
+      linear-gradient(var(--ruby-rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ruby-rule) 1px, transparent 1px);
     background-size: 40px 40px;
     color: var(--ink);
     min-height: 100vh;
@@ -44,109 +44,95 @@
   /* NAV */
   .nav {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 22px 40px;
-    border-bottom: 1px solid rgba(155,27,48,0.12);
+    padding: 22px 52px;
+    border-bottom: 1px solid var(--ruby-rule);
     background: var(--page);
     position: sticky; top: 0; z-index: 10;
     font-family: var(--mono);
   }
   .nav-logo {
-    font-size: 18px; font-weight: 600; text-decoration: none;
+    font-size: 20px; font-weight: 600; text-decoration: none;
     color: var(--ruby); letter-spacing: 1px; white-space: nowrap;
   }
   .nav-logo span { color: rgba(155,27,48,0.35); }
   .nav-links { display: flex; gap: 40px; list-style: none; }
   .nav-links a {
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--ink-light); text-decoration: none; transition: color 0.15s;
   }
   .nav-links a:hover { color: var(--ruby); }
   .nav-links li.active > a { color: var(--ruby); border-bottom: 1.5px solid var(--ruby); padding-bottom: 2px; }
 
   /* PAGE HEADER */
+  .header-deco {
+    position: absolute; right: 40px; top: 52px;
+    font-size: 42px; opacity: 0.5; letter-spacing: 8px;
+    pointer-events: none; user-select: none;
+  }
   .page-header {
-    padding: 44px 40px 36px;
+    padding: 52px 52px 44px;
     border-bottom: 2px solid var(--rule);
     background: var(--page-alt);
     position: relative; overflow: hidden;
   }
-  .page-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; }
-  .page-title { font-size: 40px; font-weight: 700; letter-spacing: -0.5px; }
+  .page-eyebrow { font-family: var(--mono); font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--ruby); margin-bottom: 14px; opacity: 0.85; }
+  .page-eyebrow::before { content: '— '; }
+  .page-title { font-family: var(--sans); font-size: 56px; font-weight: 700; letter-spacing: -1.5px; line-height: 1; color: var(--ink); }
   .page-subtitle { font-size: 14px; color: var(--ink-light); margin-top: 10px; line-height: 1.6; }
-  .header-deco {
-    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
-    font-size: 42px; opacity: 0.12; letter-spacing: 8px;
-    pointer-events: none; user-select: none;
+
+  /* CONTACT DETAILS */
+  .contact-body {
+    padding: 64px 52px 80px;
   }
 
-  /* MAIN LAYOUT */
-  .contact-layout {
+  .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 280px;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
   }
-
-  /* FORM SIDE */
-  .form-section { padding: 40px 40px 48px; border-right: 2px solid var(--rule); }
-  .section-label {
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--ink-light); margin-bottom: 24px;
-  }
-
-  .form-group { margin-bottom: 20px; }
-  .form-label {
-    display: block; font-size: 11px; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--ink-light);
-    margin-bottom: 7px; font-family: var(--sans);
-  }
-  .form-input, .form-textarea {
-    width: 100%; padding: 12px 14px;
-    border: 2px solid var(--rule); background: var(--page);
-    font-family: var(--sans); font-size: 14px; color: var(--ink);
-    transition: border-color 0.15s; outline: none;
-    border-radius: 0;
-    -webkit-appearance: none;
-  }
-  .form-input:focus, .form-textarea:focus { border-color: var(--ink); }
-  .form-textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-  .submit-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 28px;
-    background: var(--ink); color: #fff;
-    border: 2px solid var(--ink); cursor: pointer;
-    font-family: var(--sans); font-size: 12px;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    font-weight: 700; transition: all 0.15s;
-    margin-top: 4px;
-  }
-  .submit-btn:hover { background: var(--ruby); border-color: var(--ruby); }
-  .submit-btn .arrow { transition: transform 0.15s; }
-  .submit-btn:hover .arrow { transform: translateX(4px); }
-
-  /* SUCCESS STATE */
-  .success-msg {
-    display: none; padding: 16px 18px;
-    border: 2px solid var(--green); background: var(--green-bg);
-    font-size: 13px; color: var(--green); margin-top: 16px;
-    line-height: 1.6;
-  }
-  .success-msg.visible { display: block; }
-
-  /* INFO SIDE */
-  .info-section { padding: 40px 28px 48px; background: var(--page-alt); }
 
   .contact-item {
-    padding: 18px 0; border-bottom: 1.5px solid var(--rule);
-    display: flex; flex-direction: column; gap: 4px;
+    background: var(--page);
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
-  .contact-item:first-of-type { padding-top: 0; }
-  .contact-item:last-of-type { border-bottom: none; }
-  .contact-item-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-light); }
-  .contact-item-value { font-size: 14px; color: var(--ink); line-height: 1.5; word-break: break-word; }
-  .contact-item-value a { color: var(--ruby); text-decoration: none; }
-  .contact-item-value a:hover { text-decoration: underline; }
+
+  .contact-item-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  .contact-item-value {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  .contact-item-value a {
+    color: var(--ruby);
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .contact-item-value a:hover { opacity: 0.7; }
+
+  .contact-item-value.muted {
+    color: var(--ink-light);
+    font-style: italic;
+    font-size: 18px;
+  }
+
+  .contact-item.full-width {
+    grid-column: 1 / -1;
+  }
 </style>
 </head>
 <body>
@@ -163,7 +149,7 @@
   </nav>
 
   <div class="page-header">
-    <div class="header-deco">✉️📬</div>
+    <div class="header-deco">📬</div>
     <div class="page-eyebrow">Get in Touch</div>
     <div class="page-title">Contact</div>
     <div class="page-subtitle">
@@ -172,51 +158,14 @@
     </div>
   </div>
 
-  <div class="contact-layout">
+  <div class="contact-body">
+    <div class="contact-grid">
 
-    <div class="form-section">
-      <div class="section-label">Send a Message</div>
-      <form id="contactForm" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="fname">Name</label>
-            <input class="form-input" type="text" id="fname" placeholder="Your name" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="femail">Email</label>
-            <input class="form-input" type="email" id="femail" placeholder="your@email.com" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="fsubject">Subject</label>
-          <input class="form-input" type="text" id="fsubject" placeholder="What's this about?">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="fmessage">Message</label>
-          <textarea class="form-textarea" id="fmessage" placeholder="Tell me about the opportunity, project, or question…" required></textarea>
-        </div>
-        <button class="submit-btn" type="submit">
-          Send Message <span class="arrow">→</span>
-        </button>
-      </form>
-      <div class="success-msg" id="successMsg">
-        ✓ &nbsp; Thanks for reaching out! I'll get back to you within 1–2 business days.
-      </div>
-    </div>
-
-    <div class="info-section">
-      <div class="section-label">Details</div>
-
-      <div class="contact-item">
+      <div class="contact-item full-width">
         <span class="contact-item-label">Email</span>
         <span class="contact-item-value">
-          <a href="mailto:ashlee.maravilla@gmail.com">ashlee.maravilla@gmail.com</a>
+          <a href="mailto:contact@ashleemaravilla.com">contact@ashleemaravilla.com</a>
         </span>
-      </div>
-
-      <div class="contact-item">
-        <span class="contact-item-label">Phone</span>
-        <span class="contact-item-value" style="color:var(--ink-light); font-style:italic;">Available upon request</span>
       </div>
 
       <div class="contact-item">
@@ -224,6 +173,11 @@
         <span class="contact-item-value">
           <a href="https://linkedin.com/in/ashlee-maravilla" target="_blank" rel="noopener">linkedin.com/in/ashlee-maravilla</a>
         </span>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <span class="contact-item-value muted">Available upon request</span>
       </div>
 
       <div class="contact-item">
@@ -235,31 +189,10 @@
         <span class="contact-item-label">Timezone</span>
         <span class="contact-item-value">Eastern Time (ET)</span>
       </div>
-    </div>
 
+    </div>
   </div>
 
 </div>
-
-<script>
-function handleSubmit(e) {
-  e.preventDefault();
-  document.getElementById('contactForm').style.display = 'none';
-  document.getElementById('successMsg').classList.add('visible');
-}
-
-['fname','femail','fsubject','fmessage'].forEach(id => {
-  const el = document.getElementById(id);
-  const saved = localStorage.getItem('cf_' + id);
-  if (saved) el.value = saved;
-  el.addEventListener('input', () => localStorage.setItem('cf_' + id, el.value));
-});
-
-window.addEventListener('scroll', () => localStorage.setItem('contact_scroll', window.scrollY));
-window.addEventListener('load', () => {
-  const s = localStorage.getItem('contact_scroll');
-  if (s) setTimeout(() => window.scrollTo(0, parseInt(s)), 50);
-});
-</script>
 </body>
 </html>

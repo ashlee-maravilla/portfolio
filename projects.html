@@ -24,6 +24,7 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--sans);
+    font-size: 18px;
     background: var(--page);
     background-image:
       linear-gradient(rgba(155,27,48,0.06) 1px, transparent 1px),
@@ -43,20 +44,20 @@
   /* NAV */
   .nav {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 22px 40px;
+    padding: 22px 52px;
     border-bottom: 1px solid rgba(155,27,48,0.12);
     background: var(--page);
     position: sticky; top: 0; z-index: 10;
     font-family: var(--mono);
   }
   .nav-logo {
-    font-size: 18px; font-weight: 600; text-decoration: none;
+    font-size: 20px; font-weight: 600; text-decoration: none;
     color: var(--ruby); letter-spacing: 1px; white-space: nowrap;
   }
   .nav-logo span { color: rgba(155,27,48,0.35); }
   .nav-links { display: flex; gap: 40px; list-style: none; }
   .nav-links a {
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--ink-light); text-decoration: none; transition: color 0.15s;
   }
   .nav-links a:hover { color: var(--ruby); }
@@ -65,23 +66,24 @@
 
   /* PAGE HEADER */
   .page-header {
-    padding: 44px 40px 36px;
+    padding: 52px 52px 44px;
     border-bottom: 2px solid var(--rule);
     background: var(--page-alt);
     position: relative; overflow: hidden;
   }
-  .page-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 10px; }
-  .page-title { font-size: 40px; font-weight: 700; letter-spacing: -0.5px; }
+  .page-eyebrow { font-family: var(--mono); font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--ruby); margin-bottom: 14px; opacity: 0.85; }
+  .page-eyebrow::before { content: '— '; }
+  .page-title { font-family: var(--sans); font-size: 56px; font-weight: 700; letter-spacing: -1.5px; line-height: 1; color: var(--ink); }
   .header-deco {
     position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
-    font-size: 42px; opacity: 0.12; letter-spacing: 8px;
+    font-size: 42px; opacity: 0.5; letter-spacing: 8px;
     pointer-events: none; user-select: none;
   }
 
   /* CONTROLS BAR */
   .controls-bar {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 40px;
+    padding: 14px 52px;
     border-bottom: 2px solid var(--ink);
     background: var(--page-alt);
     gap: 16px; flex-wrap: wrap;
@@ -107,7 +109,7 @@
   .view-btn.active { background: var(--ink); color: #fff; }
 
   /* FEATURED PROJECT */
-  .featured-wrap { padding: 32px 40px 0; }
+  .featured-wrap { padding: 32px 52px 0; }
   .featured-label {
     font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
     color: var(--ink-light); margin-bottom: 16px;
@@ -151,11 +153,12 @@
   }
   .tag-blue   { color: #1a5ca8; border-color: #1a5ca8; background: #e8f0fc; }
   .tag-green  { color: #267a50; border-color: #267a50; background: #eefaf3; }
-  .tag-amber  { color: #b06a00; border-color: #b06a00; background: #fff8ee; }
+  .tag-amber  { color: #444; border-color: #999; background: #efefef; }
   .tag-purple { color: #6040b0; border-color: #6040b0; background: #f3f0fa; }
   .tag-red    { color: #b03030; border-color: #b03030; background: #fff0f0; }
   .tag-yellow { color: #7a6000; border-color: #c9a000; background: #fffbe6; }
   .tag-orange { color: #b04f00; border-color: #d46a00; background: #fff4e6; }
+  .tag-gray   { color: #5c3010; border-color: #8b5a2b; background: #f5e8d8; }
 
   /* EXPAND TOGGLE */
   .expand-toggle {
@@ -199,7 +202,7 @@
   .stat-lbl { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-light); }
 
   /* PROJECT GRID */
-  .grid-section { padding: 0 40px 40px; }
+  .grid-section { padding: 0 52px 52px; }
   .grid-section-label {
     font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
     color: var(--ink-light); margin-bottom: 16px; padding-top: 8px;
@@ -229,7 +232,7 @@
   .card-summary { font-size: 12px; line-height: 1.7; color: #555; margin-bottom: 14px; flex: 1; }
 
   /* TIMELINE VIEW */
-  .timeline-wrap { padding: 8px 40px 40px; display: none; }
+  .timeline-wrap { padding: 8px 52px 52px; display: none; }
   .timeline-wrap.visible { display: block; }
   .timeline-item {
     display: grid; grid-template-columns: 90px 28px 1fr;
@@ -288,8 +291,11 @@
       <button class="filter-btn" onclick="setFilter('electrical', event)">Electrical</button>
       <button class="filter-btn" onclick="setFilter('mechanical', event)">Mechanical</button>
       <button class="filter-btn" onclick="setFilter('hardware', event)">Hardware</button>
-      <button class="filter-btn" onclick="setFilter('security', event)">Security</button>
+      <button class="filter-btn" onclick="setFilter('automation', event)">Automation</button>
       <button class="filter-btn" onclick="setFilter('pm', event)">Project Mgmt</button>
+      <button class="filter-btn" onclick="setFilter('budget', event)">Budgeting</button>
+      <button class="filter-btn" onclick="setFilter('security', event)">Security</button>
+      <button class="filter-btn" onclick="setFilter('people', event)">People &amp; Comms</button>
     </div>
     <div class="view-toggle">
       <button class="view-btn active" id="btn-grid" onclick="setView('grid')">&#9645; Grid</button>
@@ -303,7 +309,7 @@
     <!-- FEATURED -->
     <div class="featured-wrap" id="featuredWrap">
       <div class="featured-label">Featured Project</div>
-      <div class="featured-card" id="featuredCard" data-tags="electrical mechanical pm budget" onclick="toggleExpand('featured')">
+      <div class="featured-card" id="featuredCard" data-tags="electrical mechanical pm budget automation" onclick="toggleExpand('featured')">
         <div class="pin-badge">★ Pinned</div>
         <div class="featured-card-inner">
           <div class="featured-thumb">project photo / diagram</div>
@@ -316,8 +322,9 @@
             <div class="tag-row">
               <span class="tag tag-yellow">Electrical</span>
               <span class="tag tag-blue">Mechanical</span>
+              <span class="tag tag-amber">Automation</span>
               <span class="tag tag-orange">Project Mgmt</span>
-              <span class="tag tag-green">Budget Governance</span>
+              <span class="tag tag-green">Budgeting</span>
             </div>
           </div>
         </div>
@@ -362,15 +369,65 @@
       <div class="grid-section-label">All Projects</div>
       <div class="project-grid" id="projectGrid">
 
+        <!-- Data Center Tours -->
+        <div class="project-card" data-tags="electrical mechanical hardware people" onclick="toggleExpand('tours')">
+          <div class="card-thumb">data center floor / tour route</div>
+          <div class="card-body">
+            <div class="card-meta">2022 – Present &nbsp;·&nbsp; Facilities Infrastructure</div>
+            <div class="card-title">Data Center Tours</div>
+            <div class="card-summary">Conducted guided tours of the data center floor and plant infrastructure for a range of internal and external stakeholders, communicating complex technical environments to diverse audiences.</div>
+            <div class="tag-row">
+              <span class="tag tag-yellow">Electrical</span>
+              <span class="tag tag-blue">Mechanical</span>
+              <span class="tag tag-purple">Hardware</span>
+              <span class="tag tag-gray">People &amp; Comms</span>
+            </div>
+          </div>
+          <button class="expand-toggle" onclick="toggleExpand('tours'); event.stopPropagation();">
+            <span class="expand-arrow" id="arrow-tours">▶</span> View details
+          </button>
+          <div class="expand-panel" id="panel-tours">
+            <div class="expand-inner">
+              <ul class="bullet-list">
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- IBM Mainframe -->
+        <div class="project-card" data-tags="hardware pm" onclick="toggleExpand('ibm')">
+          <div class="card-thumb">server room / mainframe</div>
+          <div class="card-body">
+            <div class="card-meta">2024 – 2025 &nbsp;·&nbsp; IBM / Hardware</div>
+            <div class="card-title">IBM Mainframe Refresh</div>
+            <div class="card-summary">Multi-system mainframe refresh coordinated across IBM engineering teams, resolving connection issues while maintaining project schedule.</div>
+            <div class="tag-row">
+              <span class="tag tag-purple">Hardware</span>
+              <span class="tag tag-orange">Project Mgmt</span>
+            </div>
+          </div>
+          <button class="expand-toggle" onclick="toggleExpand('ibm'); event.stopPropagation();">
+            <span class="expand-arrow" id="arrow-ibm">▶</span> View details
+          </button>
+          <div class="expand-panel" id="panel-ibm">
+            <div class="expand-inner">
+              <ul class="bullet-list">
+                <li>Represented department in weekly cross-functional update meetings to track progress and remedy issues</li>
+                <li>Assisted IBM client engineers to troubleshoot connection issues and maintain project schedule</li>
+                <li>Coordinated installation of replacement frames, executed controlled decommissioning of legacy frames, and ensured chain-of-custody compliance for secure return to IBM</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <!-- ISP Fiber -->
-        <div class="project-card" data-tags="electrical hardware pm" onclick="toggleExpand('fiber')">
+        <div class="project-card" data-tags="hardware pm" onclick="toggleExpand('fiber')">
           <div class="card-thumb">fiber routing / cabinet diagram</div>
           <div class="card-body">
             <div class="card-meta">2023 – 2024 &nbsp;·&nbsp; ISP / Network Infrastructure</div>
             <div class="card-title">ISP Fiber Infrastructure Refresh</div>
             <div class="card-summary">End-to-end delivery of two sequential fiber projects routing new runs from street-level circuits into data center cabinets for AT&amp;T (2023) and Verizon (2024).</div>
             <div class="tag-row">
-              <span class="tag tag-yellow">Electrical</span>
               <span class="tag tag-purple">Hardware</span>
               <span class="tag tag-orange">Project Mgmt</span>
             </div>
@@ -391,35 +448,8 @@
           </div>
         </div>
 
-        <!-- IBM Mainframe -->
-        <div class="project-card" data-tags="electrical hardware pm" onclick="toggleExpand('ibm')">
-          <div class="card-thumb">server room / mainframe</div>
-          <div class="card-body">
-            <div class="card-meta">2024 – 2025 &nbsp;·&nbsp; IBM / Hardware</div>
-            <div class="card-title">IBM Mainframe Refresh</div>
-            <div class="card-summary">Multi-system mainframe refresh coordinated across IBM engineering teams, resolving connection issues while maintaining project schedule.</div>
-            <div class="tag-row">
-              <span class="tag tag-yellow">Electrical</span>
-              <span class="tag tag-purple">Hardware</span>
-              <span class="tag tag-orange">Project Mgmt</span>
-            </div>
-          </div>
-          <button class="expand-toggle" onclick="toggleExpand('ibm'); event.stopPropagation();">
-            <span class="expand-arrow" id="arrow-ibm">▶</span> View details
-          </button>
-          <div class="expand-panel" id="panel-ibm">
-            <div class="expand-inner">
-              <ul class="bullet-list">
-                <li>Represented department in weekly cross-functional update meetings to track progress and remedy issues</li>
-                <li>Assisted IBM client engineers to troubleshoot connection issues and maintain project schedule</li>
-                <li>Coordinated installation of replacement frames, executed controlled decommissioning of legacy frames, and ensured chain-of-custody compliance for secure return to IBM</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
         <!-- Security -->
-        <div class="project-card" data-tags="security hardware pm" onclick="toggleExpand('security')">
+        <div class="project-card" data-tags="security hardware pm budget" onclick="toggleExpand('security')">
           <div class="card-thumb">security camera / network diagram</div>
           <div class="card-body">
             <div class="card-meta">2022 – 2023 &nbsp;·&nbsp; Security Infrastructure</div>
@@ -429,6 +459,7 @@
               <span class="tag tag-red">Security</span>
               <span class="tag tag-purple">Hardware</span>
               <span class="tag tag-orange">Project Mgmt</span>
+              <span class="tag tag-green">Budgeting</span>
             </div>
           </div>
           <button class="expand-toggle" onclick="toggleExpand('security'); event.stopPropagation();">
@@ -455,7 +486,23 @@
   <div class="timeline-wrap" id="timelineView">
     <div style="padding-top:24px;">
 
-      <div class="timeline-item" data-tags="electrical mechanical pm budget">
+      <div class="timeline-item" data-tags="electrical mechanical hardware people">
+        <div class="tl-year">2022–Present</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Data Center Tours</div>
+          <div class="tl-duration">Ongoing &nbsp;·&nbsp; Facilities Infrastructure</div>
+          <div class="tl-desc"></div>
+          <div class="tag-row">
+            <span class="tag tag-yellow">Electrical</span>
+            <span class="tag tag-blue">Mechanical</span>
+            <span class="tag tag-purple">Hardware</span>
+            <span class="tag tag-gray">People &amp; Comms</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-tags="electrical mechanical pm budget automation">
         <div class="tl-year">2022–2026</div>
         <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
         <div class="tl-content">
@@ -465,28 +512,14 @@
           <div class="tag-row">
             <span class="tag tag-yellow">Electrical</span>
             <span class="tag tag-blue">Mechanical</span>
+            <span class="tag tag-amber">Automation</span>
             <span class="tag tag-orange">Project Mgmt</span>
-            <span class="tag tag-green">Budget Governance</span>
+            <span class="tag tag-green">Budgeting</span>
           </div>
         </div>
       </div>
 
-      <div class="timeline-item" data-tags="electrical hardware pm">
-        <div class="tl-year">2023–2024</div>
-        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-content">
-          <div class="tl-title">ISP Fiber Infrastructure Refresh</div>
-          <div class="tl-duration">1 year &nbsp;·&nbsp; ISP / Network Infrastructure</div>
-          <div class="tl-desc">End-to-end delivery of fiber infrastructure projects for AT&amp;T and Verizon, routing new runs from street-level circuits into data center cabinets with zero service downtime.</div>
-          <div class="tag-row">
-            <span class="tag tag-yellow">Electrical</span>
-            <span class="tag tag-purple">Hardware</span>
-            <span class="tag tag-orange">Project Mgmt</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-tags="electrical hardware pm">
+      <div class="timeline-item" data-tags="hardware pm">
         <div class="tl-year">2024–2025</div>
         <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
         <div class="tl-content">
@@ -494,14 +527,27 @@
           <div class="tl-duration">1 year &nbsp;·&nbsp; Hardware, Cross-functional</div>
           <div class="tl-desc">Multi-system mainframe refresh coordinated across IBM engineering teams. Represented department in weekly cross-functional meetings, resolving connection issues to maintain schedule.</div>
           <div class="tag-row">
-            <span class="tag tag-yellow">Electrical</span>
             <span class="tag tag-purple">Hardware</span>
             <span class="tag tag-orange">Project Mgmt</span>
           </div>
         </div>
       </div>
 
-      <div class="timeline-item" data-tags="security hardware pm">
+      <div class="timeline-item" data-tags="hardware pm">
+        <div class="tl-year">2023–2024</div>
+        <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">ISP Fiber Infrastructure Refresh</div>
+          <div class="tl-duration">1 year &nbsp;·&nbsp; ISP / Network Infrastructure</div>
+          <div class="tl-desc">End-to-end delivery of fiber infrastructure projects for AT&amp;T and Verizon, routing new runs from street-level circuits into data center cabinets with zero service downtime.</div>
+          <div class="tag-row">
+            <span class="tag tag-purple">Hardware</span>
+            <span class="tag tag-orange">Project Mgmt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-tags="security hardware pm budget">
         <div class="tl-year">2022–2023</div>
         <div class="tl-spine"><div class="tl-dot" style="background:#888;outline-color:#888;"></div></div>
         <div class="tl-content">
@@ -512,6 +558,7 @@
             <span class="tag tag-red">Security</span>
             <span class="tag tag-purple">Hardware</span>
             <span class="tag tag-orange">Project Mgmt</span>
+            <span class="tag tag-green">Budgeting</span>
           </div>
         </div>
       </div>
